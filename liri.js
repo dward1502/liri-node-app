@@ -8,8 +8,6 @@ let Spotify = require('node-spotify-api');
 let spotify = new Spotify(keys.spotify);
 let client = new Twitter(keys.twitter);
 
-// console.log( spotify);
-// console.log( client);
 //bonus read and write to sperate file use write sync
 let arg = process.argv[2];
 
@@ -58,21 +56,25 @@ switch (arg) {
 
         break;
     case "movie-this":
-        let request = require('request');
-        let movie = process.argv[3];
-        request('http://www.omdbapi.com/?apikey=trilogy&t= ' + movie + '', function (error, response, body) {
+        var request = require('request');
+        var movieStr1 = process.argv[3];
+       // var movieStr2 = process.argv[4];
+        //var movie = movieStr1 + "+" + movieStr2;    
+
+        request('http://www.omdbapi.com/?apikey=trilogy&t= ' + movieStr1 + '', function (error, response, body) {
             if (!error && response.statusCode === 200) {
+                console.log(response);
                 console.log("The title is : " + JSON.parse(body).Title);
-                console.log(JSON.parse(body).Year);
-                console.log(JSON.parse(body).imdbRating);
-                console.log(JSON.parse(body).Plot);
-                console.log(JSON.parse(body).Plot);
-                console.log(JSON.parse(body).Plot);
+                console.log("Year movie was produced : " + JSON.parse(body).Year);
+                console.log("IMDB Rating : " + JSON.parse(body).imdbRating);
+                console.log("Rotten tomatoes rating : " + JSON.parse(body).Ratings[1].Value);
+                console.log("Country movie was produced in : " + JSON.parse(body).Country);
+                console.log("Movie Language : " + JSON.parse(body).Language);
+                console.log("Plot of movie : " + JSON.parse(body).Plot);
+                console.log("Actors in movie : " + JSON.parse(body).Actors);
 
                 console.log(body);
             }
-
-
         });
 
         console.log("test omdb movie");
