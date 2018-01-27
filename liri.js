@@ -92,7 +92,7 @@ argDoWhat = function () {
 
 switch (arg) {
     case "my-tweets":
-            twit();
+        twit();
         break;
     case "spotify-this-song":
         spot(arg2);
